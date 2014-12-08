@@ -21,6 +21,7 @@ data = data[data$Date_Time >= minDate & data$Date_Time <= maxDate, ]
 
 # Plot
 par(mfrow = c(1, 1))
+par(mar=c(0, 0, 0, 0))
 globalActivePowerData <- data[complete.cases(data$Global_active_power), ]
 
 with(globalActivePowerData, plot(Date_Time, Sub_metering_1,
@@ -39,7 +40,7 @@ with(globalActivePowerData, lines(Date_Time, Sub_metering_3,
 axis.POSIXct(1, at = seq(
     globalActivePowerData$Date_Time[1],
     globalActivePowerData$Date_Time[length(globalActivePowerData$Date_Time)], "days"), format = "%a")
-legend("topright", inset=c(0.07, 0),  lty = 1, col = c("black", "red", "blue"),
+legend("topright", lty = 1, col = c("black", "red", "blue"),
        legend = c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"))
 
 dev.copy(png, "plot3.png")

@@ -2,14 +2,14 @@
 fileUrl <- "household_power_consumption.txt"
 con <- file(fileUrl, 'r')
 rm('fileUrl')
-data <- read.table(
-    con, 
-    stringsAsFactors = FALSE,
-    header = TRUE,
-    sep = ";",
-    na.string = "?"
-)
-data$Date_Time <- strptime(sprintf("%s %s", data$Date, data$Time), "%d/%m/%Y %H:%M:%S")
+#data <- read.table(
+#    con, 
+#    stringsAsFactors = FALSE,
+#    header = TRUE,
+#    sep = ";",
+#    na.string = "?"
+#)
+#data$Date_Time <- strptime(sprintf("%s %s", data$Date, data$Time), "%d/%m/%Y %H:%M:%S")
 close(con)
 rm('con')
 
@@ -23,6 +23,7 @@ globalActivePowerData <- data[complete.cases(data$Global_active_power), ]
 par(mfrow = c(2, 2))
 par(cex.lab = 0.7)
 par(mgp = c(2.5, 1, 0))
+par(mar=c(4, 4, 0, 0))
 
 ### Plot 1
 with(globalActivePowerData,
@@ -72,7 +73,9 @@ axis.POSIXct(1, at = seq(
     globalActivePowerData$Date_Time[length(globalActivePowerData$Date_Time)], "days"), format = "%a")
 legend("topright", lty = 1, col = c("black", "red", "blue"),
        legend = c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"),
-       bty = "n")
+       bty = "n",
+       cex = 0.7,
+       inset=c(-0.1, -0.05))
 
 ### Plot 4
 with(globalActivePowerData,
@@ -100,4 +103,4 @@ rm('axisLbl')
 rm('minDate')
 rm('maxDate')
 rm('globalActivePowerData')
-rm('data')
+#rm('data')
